@@ -1,7 +1,7 @@
 import numpy as nmp
 
 # Creating 3 variables, one with a value
-num1 = 874
+num1 = 8
 num2 = 34
 resultado = 0
 
@@ -19,11 +19,11 @@ print("Mult: %s * %s = %s \n" % (num1, num2, resultado))
 
 # Dividing the first and second number
 resultado = num1 / num2
-print("Div: %s / %s = %s \n" % (num1, num2, resultado))
+print("Div: %s / %s = %2.5f \n" % (num1, num2, resultado))
 
 # Raising the first number to the second
 resultado = num1 ** num2
-print("Exp: %s ^ %s = %s \n" % (num1, num2, resultado))
+print("Exp: %s ^ %s = %2.5e \n" % (num1, num2, resultado))
 
 # Creating the first matrix
 matrix = nmp.random.randint(1, 9, (5, 5), int)
