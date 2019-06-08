@@ -32,3 +32,5 @@ print("Matrix 5x5:\n %s \n\n" % str(matrix))
 # Modifying the fist matrix by adding a '1' diagonal
 nmp.fill_diagonal(matrix, 1)
 print("Modified matrix 5x5:\n %s \n\n" % str(matrix))
+
+
