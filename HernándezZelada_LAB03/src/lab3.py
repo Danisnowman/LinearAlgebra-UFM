@@ -53,6 +53,7 @@ matrixC = np.array([[1,1,0],
 ######### EJERCICIO 1 #########
 
 print("\n\n---------------- 1 ----------------\n\n")
+
 # SYMPY PRINTING
 print("Pretty-printing with SymPy:\n")
 print("Inverse of Matrix A:\n")
@@ -174,9 +175,10 @@ def arrowed_spines(fig, ax):
              length_includes_head= True, clip_on = True)
 
 
-# def f(x):
-#     return 1-x
+# changing stylesheet
 plt.style.use('seaborn-pastel')
+
+# defining x range and functions
 x = np.arange(-15,15,0.1)
 
 fx = 2-x
