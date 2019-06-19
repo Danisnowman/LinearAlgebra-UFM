@@ -144,19 +144,9 @@ print("\n")
 print("\n\n---------------- 4 ----------------\n\n")
 
 def arrowed_spines(fig, ax):
-
-    xmin, xmax = ax.get_xlim() 
-    ymin, ymax = ax.get_ylim()
-
-    # removing the default axis on all sides:
-    for side in ['bottom','right','top','left']:
-        ax.spines[side].set_visible(False)
-
-    # removing the axis ticks
-    plt.xticks([]) # labels 
-    plt.yticks([])
-    ax.xaxis.set_ticks_position('none') # tick markers
-    ax.yaxis.set_ticks_position('none')
+    
+    xmin, xmax = (-8,8)
+    ymin, ymax = (-8,8)
 
     # get width and height of axes object to compute 
     # matching arrowhead length and width
@@ -165,8 +155,8 @@ def arrowed_spines(fig, ax):
     width, height = bbox.width, bbox.height
 
     # manual arrowhead width and length
-    hw = 1./20.*(ymax-ymin) 
-    hl = 1./20.*(xmax-xmin)
+    hw = .5
+    hl = .5
     lw = 1. # axis line width
     ohg = 0.3 # arrow overhang
 
@@ -177,19 +167,19 @@ def arrowed_spines(fig, ax):
     # draw x and y axis
     ax.arrow(xmin, 0, xmax-xmin, 0., fc='k', ec='k', lw = lw, 
              head_width=hw, head_length=hl, overhang = ohg, 
-             length_includes_head= True, clip_on = False) 
+             length_includes_head= True, clip_on = True) 
 
     ax.arrow(0, ymin, 0., ymax-ymin, fc='k', ec='k', lw = lw, 
              head_width=yhw, head_length=yhl, overhang = ohg, 
-             length_includes_head= True, clip_on = False)
+             length_includes_head= True, clip_on = True)
 
 
 # def f(x):
 #     return 1-x
-plt.style.use('seaborn-muted')
-x = np.arange(-10,10,0.1)
+plt.style.use('seaborn-pastel')
+x = np.arange(-15,15,0.1)
 
-fx = 1-x
+fx = 2-x
 gx = x-4
 hx = x+4
 ix = 6-x
@@ -207,15 +197,58 @@ plt.plot(x, ix, label="i(x)")
 plt.axhline(0, color="black")
 plt.axvline(0, color="black")
 
+# define corner points
+x = [-1,3,5,1]
+y = [3,-1,1,5]
+
+# plot
+l = plt.fill(x,y, facecolor=(.4,.9,.7,.3), alpha=0.6)
+fig = plt.gcf()
+ax = plt.gca()
+arrowed_spines(fig, ax)
 
 
-# plt.fill_between(x, min1, min2)
-plt.title("Bonus graphs:")
-plt.grid()
+# limits
+plt.xlim(-8, 8)
+plt.ylim(-8, 8)
+
+
+# add more ticks
+ax.set_xticks(np.arange(-8,8))
+ax.set_yticks(np.arange(-8,8))
+
+# remove tick marks
+ax.xaxis.set_tick_params(size=0)
+ax.yaxis.set_tick_params(size=0)
+
+# change the color of the top and right spines to opaque gray
+ax.spines['right'].set_color((.8,.8,.8))
+ax.spines['top'].set_color((.8,.8,.8))
+# set title
+plt.title("Bonus Graph:")
+
+# set legend
+plt.legend(loc="upper right")
+
+# set gird
+plt.grid('on',linestyle="--")
 plt.xlabel("X Axis")
 plt.ylabel("Y Axis")
-plt.legend()
-plt.savefig("output.png", dpi=300)
+
+# tweak the axis labels
+xlab = ax.xaxis.get_label()
+ylab = ax.yaxis.get_label()
+
+xlab.set_style('italic')
+xlab.set_size(10)
+ylab.set_style('italic')
+ylab.set_size(10)
+
+# tweak the title
+ttl = ax.title
+ttl.set_weight('bold')
+
+plt.savefig("bonus_graph.pdf")
 plt.show()
 
 
