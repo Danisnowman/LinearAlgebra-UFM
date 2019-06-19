@@ -53,6 +53,7 @@ matrixC = np.array([[1,1,0],
 ######### EJERCICIO 1 #########
 
 print("\n\n---------------- 1 ----------------\n\n")
+
 # SYMPY PRINTING
 print("Pretty-printing with SymPy:\n")
 print("Inverse of Matrix A:\n")
