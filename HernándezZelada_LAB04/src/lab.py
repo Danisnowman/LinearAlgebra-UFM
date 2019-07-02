@@ -188,7 +188,7 @@ input("Press Enter to continue...\n\n")
 
 ### MATRIX C ###
 print("Diagonalization of Matrix C:\n")
-syDiagonalizationC = diag(matrixA)
+syDiagonalizationC = diag(matrixC)
 sp.pprint(syDiagonalizationC)
 print("\n Char Poly of Matrix C:")
 syPolC = charply(matrixC)
