@@ -14,12 +14,12 @@ matplotlib.use('TkAgg')
 from scipy import optimize
 from matplotlib import pyplot as plt
 from sympy import pretty_print as pp
-from sympy.abc import A,  T, b
+from sympy.abc import A,  T, b, p
 
 
 
 
-""" 
+
  ######### EJERCICIO 1 #########
 
 print("\n\n---------------- 1 ----------------\n\n")
@@ -129,7 +129,7 @@ graph1.savefig("Graph_1.pdf")
 
 plt.plot()
 
-input("Press Enter to continue...\n\n") """
+input("Press Enter to continue...\n\n")
 
 
 
@@ -147,6 +147,7 @@ y_processed_data = np.array(processed_data[:, [1]])
 
 
 
+
 A_2 = np.hstack([
     x_processed_data, 
     np.ones((x_processed_data.shape),dtype=float)
@@ -159,7 +160,17 @@ m_2 = m_2[0]
 b_2 = b_2[0]
 print("\n\nThe Coefficients of the line are:")
 print("Slope = ", round(m_2,4), "Intersect = ", round(b_2,4), "\n")
-print("Maximized function: ",sc.maximum())
+
+def expression(p_1):
+    return -1 * ((b_2 + m_2 * p_1[0])*(p_1[0] - 0.23))
+
+expresion__ = (b_2 + m_2 * p)*(p - 0.23)
+derivative = expresion__.diff(p) 
+print("Derivative: ")
+pp(derivative)
+solution = sp.solve(derivative, p)
+print("\n The max is: ",solution[0])
+
 
 
 graph2 = plt.figure(2)
@@ -183,5 +194,5 @@ plt.savefig("Graph_2.pdf")
 plt.plot()
 
 
-
+# Prints both of the graphs
 plt.show()
