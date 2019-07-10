@@ -2,7 +2,6 @@
 Created on Mon Jun 17 19:15:52 2019
 @author: danisnowman
 """
-import scipy as sc
 import pandas as pd
 import tkinter as tk
 import numpy as np 
@@ -10,8 +9,6 @@ import sympy as sp
 import tkinter.filedialog
 import matplotlib
 matplotlib.use('TkAgg')
-# from tkinter import filedialog as fd
-from scipy import optimize
 from matplotlib import pyplot as plt
 from sympy import pretty_print as pp
 from sympy.abc import A,  T, b, p
@@ -45,15 +42,16 @@ life_expectancy = np.array([
     [73.7],
     [75.4]])
 
-# Pretty-Printing A matrix and b matrix
+# Pretty-Printing A matrix
 print("Matrix A will be: \n")
 pp(sp.Matrix(year_of_birth))
 
+# Pretty-Printing b matrix
 print("\n\nMatrix b will be: \n")
 pp(sp.Matrix(life_expectancy))
 
 # Normal Equations
-equation_1 = (A**T * A)**T
+equation_1 = (A**T * A)**T # I'm using (A^T * A)^T to Pretty-Print in the correct format i.e. A^T*A instead of A*A^T which is de default in sp.pprint()
 equation_2 = (A**T * b)
 At = year_of_birth.transpose()
 AtA = np.dot(At, year_of_birth)
@@ -71,6 +69,8 @@ print("\n")
 # Normal Equation Solution
 print("\nAT Ax = ATb \n")
 x = np.dot(np.linalg.inv(AtA),Atb)
+
+# Printing Equations
 print("Lease Square Solutions: \n")
 pp(sp.Matrix(x))
 
@@ -107,6 +107,9 @@ print("\n\nThe Coefficients of the line are:")
 print("Slope = ", round(m,4), "Intersect = ", round(b,4), "\n")
 print("a. Prediction when x = 2000: ", round(((m*2000)+b),2))
 print("b. Fairly good given the small margin of errors on each life expectancy in relation to the new line.")
+
+
+# Graphing settings (for the first graph)
 
 graph1 = plt.figure(1)
 
@@ -145,9 +148,6 @@ x_processed_data = np.array(processed_data[:, [0]])
 y_processed_data = np.array(processed_data[:, [1]])
 
 
-
-
-
 A_2 = np.hstack([
     x_processed_data, 
     np.ones((x_processed_data.shape),dtype=float)
@@ -156,22 +156,23 @@ print("A =\n")
 pp(sp.Matrix(A_2))
 m_2, b_2 = np.linalg.lstsq(A_2, y_processed_data, rcond=None)[0]
 
+# I extract the numeric values from the (1,1) matrices
 m_2 = m_2[0]
 b_2 = b_2[0]
+
 print("\n\nThe Coefficients of the line are:")
 print("Slope = ", round(m_2,4), "Intersect = ", round(b_2,4), "\n")
 
-def expression(p_1):
-    return -1 * ((b_2 + m_2 * p_1[0])*(p_1[0] - 0.23))
-
+# We solve for x to maximize the function
 expresion__ = (b_2 + m_2 * p)*(p - 0.23)
 derivative = expresion__.diff(p) 
 print("Derivative: ")
 pp(derivative)
 solution = sp.solve(derivative, p)
-print("\n The max is: ",solution[0])
+print("\n The max Price is: ",round(solution[0],3))
 
 
+# Graphing settings (for the second graph)
 
 graph2 = plt.figure(2)
 
