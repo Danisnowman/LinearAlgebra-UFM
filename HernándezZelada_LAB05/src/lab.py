@@ -2,7 +2,7 @@
 Created on Mon Jun 17 19:15:52 2019
 @author: danisnowman
 """
-import scipy
+import scipy as sc
 import pandas as pd
 import tkinter as tk
 import numpy as np 
@@ -19,7 +19,7 @@ from sympy.abc import A,  T, b
 
 
 
-
+""" 
  ######### EJERCICIO 1 #########
 
 print("\n\n---------------- 1 ----------------\n\n")
@@ -129,7 +129,7 @@ graph1.savefig("Graph_1.pdf")
 
 plt.plot()
 
-input("Press Enter to continue...\n\n")
+input("Press Enter to continue...\n\n") """
 
 
 
@@ -159,7 +159,7 @@ m_2 = m_2[0]
 b_2 = b_2[0]
 print("\n\nThe Coefficients of the line are:")
 print("Slope = ", round(m_2,4), "Intersect = ", round(b_2,4), "\n")
-#print("Maximized function: ",optimize.minimize()))
+print("Maximized function: ",sc.maximum())
 
 
 graph2 = plt.figure(2)
@@ -169,13 +169,13 @@ plt.style.use('seaborn-pastel')
 
 # set gird
 plt.grid('on',linestyle="--")
-plt.xlabel("Quantity")
-plt.ylabel("Price")
+plt.ylabel("Quantity")
+plt.xlabel("Price")
 
 plt.plot(x_processed_data, y_processed_data, "o",label="Real Facts")
 plt.plot(x_processed_data, m_2*x_processed_data + b_2,label="Best Fitting Line")
-plt.plot(x_processed_data,y_processed_data-m_2*x_processed_data-b_2, "x", label="Errs.")
-plt.plot(x_processed_data,0*x_processed_data,"--")
+plt.plot(x_processed_data, y_processed_data-m_2*x_processed_data-b_2, "x", label="Errs.")
+plt.plot(x_processed_data, 0*x_processed_data,"--")
 plt.title("Best Fitting Line").set_weight('bold')
 plt.legend(loc="center right")
 plt.savefig("Graph_2.pdf")
