@@ -12,12 +12,14 @@ matplotlib.use('TkAgg')
 from matplotlib import pyplot as plt
 from sympy import pretty_print as pp
 from sympy.abc import A,  T, b, p
+from math import sqrt
+SPINE_COLOR = 'gray'
+from matplotlib import rc
+#rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
+## for Palatino and other serif fonts use:
+rc('font',**{'family':'Computer Modern Roman'})
+rc('text', usetex=True)
 
-
-
-
-
- ######### EJERCICIO 1 #########
 
 print("\n\n---------------- 1 ----------------\n\n")
 # year_of_birth will be matrix A
@@ -67,7 +69,7 @@ pp(sp.Matrix(Atb))
 print("\n")
 
 # Normal Equation Solution
-print("\nAT Ax = ATb \n")
+pp("\nAT Ax = ATb \n")
 x = np.dot(np.linalg.inv(AtA),Atb)
 
 # Printing Equations
@@ -129,6 +131,8 @@ plt.plot(x,0*x,"--")
 plt.title("Best Fitting Line").set_weight('bold')
 plt.legend(loc="center right")
 graph1.savefig("Graph_1.pdf")
+plt.tight_layout()
+
 
 plt.plot()
 
@@ -191,9 +195,14 @@ plt.plot(x_processed_data, 0*x_processed_data,"--")
 plt.title("Best Fitting Line").set_weight('bold')
 plt.legend(loc="center right")
 plt.savefig("Graph_2.pdf")
+plt.tight_layout()
+
 
 plt.plot()
 
-
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
 # Prints both of the graphs
+
+
 plt.show()
