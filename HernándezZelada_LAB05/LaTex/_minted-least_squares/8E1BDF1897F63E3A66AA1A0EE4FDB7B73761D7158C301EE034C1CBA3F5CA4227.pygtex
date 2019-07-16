@@ -1,0 +1,210 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{Created on Mon Jun 17 19:15:52 2019}
+\PYG{l+s+sd}{@author: danisnowman}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k+kn}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{tkinter} \PYG{k+kn}{as} \PYG{n+nn}{tk}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k+kn}{as} \PYG{n+nn}{np} 
+\PYG{k+kn}{import} \PYG{n+nn}{sympy} \PYG{k+kn}{as} \PYG{n+nn}{sp}
+\PYG{k+kn}{import} \PYG{n+nn}{tkinter.filedialog}
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib}
+\PYG{n}{matplotlib}\PYG{o}{.}\PYG{n}{use}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}TkAgg\PYGZsq{}}\PYG{p}{)}
+\PYG{k+kn}{from} \PYG{n+nn}{matplotlib} \PYG{k+kn}{import} \PYG{n}{pyplot} \PYG{k}{as} \PYG{n}{plt}
+\PYG{k+kn}{from} \PYG{n+nn}{sympy} \PYG{k+kn}{import} \PYG{n}{pretty\PYGZus{}print} \PYG{k}{as} \PYG{n}{pp}
+\PYG{k+kn}{from} \PYG{n+nn}{sympy.abc} \PYG{k+kn}{import} \PYG{n}{A}\PYG{p}{,}  \PYG{n}{T}\PYG{p}{,} \PYG{n}{b}\PYG{p}{,} \PYG{n}{p}
+\PYG{k+kn}{from} \PYG{n+nn}{math} \PYG{k+kn}{import} \PYG{n}{sqrt}
+\PYG{n}{SPINE\PYGZus{}COLOR} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}gray\PYGZsq{}}
+\PYG{k+kn}{from} \PYG{n+nn}{matplotlib} \PYG{k+kn}{import} \PYG{n}{rc}
+\PYG{c+c1}{\PYGZsh{}rc(\PYGZsq{}font\PYGZsq{},**\PYGZob{}\PYGZsq{}family\PYGZsq{}:\PYGZsq{}sans\PYGZhy{}serif\PYGZsq{},\PYGZsq{}sans\PYGZhy{}serif\PYGZsq{}:[\PYGZsq{}Helvetica\PYGZsq{}]\PYGZcb{})}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} for Palatino and other serif fonts use:}
+\PYG{n}{rc}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}font\PYGZsq{}}\PYG{p}{,}\PYG{o}{**}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}family\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}Computer Modern Roman\PYGZsq{}}\PYG{p}{\PYGZcb{})}
+\PYG{n}{rc}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}text\PYGZsq{}}\PYG{p}{,} \PYG{n}{usetex}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+
+
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} 1 \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} year\PYGZus{}of\PYGZus{}birth will be matrix A}
+\PYG{n}{year\PYGZus{}of\PYGZus{}birth} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1920}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1930}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1940}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1950}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1960}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1970}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1980}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1990}\PYG{p}{]])}
+
+\PYG{c+c1}{\PYGZsh{} life\PYGZus{}expectancy will be matrix b}
+\PYG{n}{life\PYGZus{}expectancy} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}
+    \PYG{p}{[}\PYG{l+m+mf}{54.1}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{59.7}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{62.9}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{68.2}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{69.7}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{70.8}\PYG{p}{],} 
+    \PYG{p}{[}\PYG{l+m+mf}{73.7}\PYG{p}{],}
+    \PYG{p}{[}\PYG{l+m+mf}{75.4}\PYG{p}{]])}
+
+\PYG{c+c1}{\PYGZsh{} Pretty\PYGZhy{}Printing A matrix}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Matrix A will be: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{year\PYGZus{}of\PYGZus{}birth}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Pretty\PYGZhy{}Printing b matrix}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{Matrix b will be: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{life\PYGZus{}expectancy}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Normal Equations}
+\PYG{n}{equation\PYGZus{}1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{A}\PYG{o}{**}\PYG{n}{T} \PYG{o}{*} \PYG{n}{A}\PYG{p}{)}\PYG{o}{**}\PYG{n}{T} \PYG{c+c1}{\PYGZsh{} I\PYGZsq{}m using (A\PYGZca{}T * A)\PYGZca{}T to Pretty\PYGZhy{}Print in the correct format i.e. A\PYGZca{}T*A instead of A*A\PYGZca{}T which is de default in sp.pprint()}
+\PYG{n}{equation\PYGZus{}2} \PYG{o}{=} \PYG{p}{(}\PYG{n}{A}\PYG{o}{**}\PYG{n}{T} \PYG{o}{*} \PYG{n}{b}\PYG{p}{)}
+\PYG{n}{At} \PYG{o}{=} \PYG{n}{year\PYGZus{}of\PYGZus{}birth}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{()}
+\PYG{n}{AtA} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{At}\PYG{p}{,} \PYG{n}{year\PYGZus{}of\PYGZus{}birth}\PYG{p}{)}
+\PYG{n}{Atb} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{At}\PYG{p}{,} \PYG{n}{life\PYGZus{}expectancy}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Pretty\PYGZhy{}Printing Normal Equations}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{equation\PYGZus{}1}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{AtA}\PYG{p}{))}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{equation\PYGZus{}2}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{Atb}\PYG{p}{))}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Normal Equation Solution}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{AT Ax = ATb }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{x} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{inv}\PYG{p}{(}\PYG{n}{AtA}\PYG{p}{),}\PYG{n}{Atb}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Printing Equations}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Lease Square Solutions: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}
+
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Least Squares using np.linalg.lstsq \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{x} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}
+    \PYG{l+m+mi}{1920}\PYG{p}{,} 
+    \PYG{l+m+mi}{1930}\PYG{p}{,} 
+    \PYG{l+m+mi}{1940}\PYG{p}{,} 
+    \PYG{l+m+mi}{1950}\PYG{p}{,} 
+    \PYG{l+m+mi}{1960}\PYG{p}{,}
+    \PYG{l+m+mi}{1970}\PYG{p}{,} 
+    \PYG{l+m+mi}{1980}\PYG{p}{,} 
+    \PYG{l+m+mi}{1990}
+    \PYG{p}{])}
+
+\PYG{n}{y} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}
+    \PYG{l+m+mf}{54.1}\PYG{p}{,} 
+    \PYG{l+m+mf}{59.7}\PYG{p}{,} 
+    \PYG{l+m+mf}{62.9}\PYG{p}{,} 
+    \PYG{l+m+mf}{68.2}\PYG{p}{,} 
+    \PYG{l+m+mf}{69.7}\PYG{p}{,} 
+    \PYG{l+m+mf}{70.8}\PYG{p}{,} 
+    \PYG{l+m+mf}{73.7}\PYG{p}{,} 
+    \PYG{l+m+mf}{75.4}
+    \PYG{p}{])}
+
+\PYG{n}{A} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{vstack}\PYG{p}{([}\PYG{n}{x}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{ones}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))])}\PYG{o}{.}\PYG{n}{T}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{A:\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{A}\PYG{p}{))}
+\PYG{n}{m}\PYG{p}{,} \PYG{n}{b} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{lstsq}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{rcond}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{The Coefficients of the line are:\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Slope = \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}Intersect = \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}a. Prediction when x = 2000: \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{round}\PYG{p}{(((}\PYG{n}{m}\PYG{o}{*}\PYG{l+m+mi}{2000}\PYG{p}{)}\PYG{o}{+}\PYG{n}{b}\PYG{p}{),}\PYG{l+m+mi}{2}\PYG{p}{))}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}b. Fairly good given the small margin of errors on each life expectancy in relation to the new line.\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Graphing settings (for the first graph)}
+
+\PYG{n}{graph1} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} changing stylesheet}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{style}\PYG{o}{.}\PYG{n}{use}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}seaborn\PYGZhy{}pastel\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} set gird}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{grid}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}on\PYGZsq{}}\PYG{p}{,}\PYG{n}{linestyle}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Years\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Life Expectancy\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}o\PYGZdq{}}\PYG{p}{,}\PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Real Facts\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{m}\PYG{o}{*}\PYG{n}{x} \PYG{o}{+} \PYG{n}{b}\PYG{p}{,}\PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Best Fitting Line\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{*}\PYG{n}{x}\PYG{o}{\PYGZhy{}}\PYG{n}{b}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Errs.\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{o}{*}\PYG{n}{x}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Best Fitting Line\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{set\PYGZus{}weight}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}bold\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{n}{loc}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}center right\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{graph1}\PYG{o}{.}\PYG{n}{savefig}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Graph\PYGZus{}1.pdf\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{tight\PYGZus{}layout}\PYG{p}{()}
+
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{()}
+
+\PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Press Enter to continue...}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} EJERCICIO 2 \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} 2 \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{n}{import\PYGZus{}file\PYGZus{}path} \PYG{o}{=} \PYG{n}{tk}\PYG{o}{.}\PYG{n}{filedialog}\PYG{o}{.}\PYG{n}{askopenfilename}\PYG{p}{()}
+\PYG{n}{cities\PYGZus{}data} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}excel}\PYG{p}{(}\PYG{n}{import\PYGZus{}file\PYGZus{}path}\PYG{p}{)}
+\PYG{n}{processed\PYGZus{}data} \PYG{o}{=} \PYG{n}{cities\PYGZus{}data}\PYG{o}{.}\PYG{n}{to\PYGZus{}numpy}\PYG{p}{()}
+\PYG{n}{x\PYGZus{}processed\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{processed\PYGZus{}data}\PYG{p}{[:,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]])}
+\PYG{n}{y\PYGZus{}processed\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{processed\PYGZus{}data}\PYG{p}{[:,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]])}
+
+
+\PYG{n}{A\PYGZus{}2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{hstack}\PYG{p}{([}
+    \PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} 
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{ones}\PYG{p}{((}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{),}\PYG{n}{dtype}\PYG{o}{=}\PYG{n+nb}{float}\PYG{p}{)}
+    \PYG{p}{])}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}A =}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{sp}\PYG{o}{.}\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{A\PYGZus{}2}\PYG{p}{))}
+\PYG{n}{m\PYGZus{}2}\PYG{p}{,} \PYG{n}{b\PYGZus{}2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{lstsq}\PYG{p}{(}\PYG{n}{A\PYGZus{}2}\PYG{p}{,} \PYG{n}{y\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{n}{rcond}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} I extract the numeric values from the (1,1) matrices}
+\PYG{n}{m\PYGZus{}2} \PYG{o}{=} \PYG{n}{m\PYGZus{}2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{n}{b\PYGZus{}2} \PYG{o}{=} \PYG{n}{b\PYGZus{}2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{The Coefficients of the line are:\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Slope = \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{m\PYGZus{}2}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}Intersect = \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{b\PYGZus{}2}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} We solve for x to maximize the function}
+\PYG{n}{expresion\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{p}{(}\PYG{n}{b\PYGZus{}2} \PYG{o}{+} \PYG{n}{m\PYGZus{}2} \PYG{o}{*} \PYG{n}{p}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{p} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{0.23}\PYG{p}{)}
+\PYG{n}{derivative} \PYG{o}{=} \PYG{n}{expresion\PYGZus{}\PYGZus{}}\PYG{o}{.}\PYG{n}{diff}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)} 
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Derivative: \PYGZdq{}}\PYG{p}{)}
+\PYG{n}{pp}\PYG{p}{(}\PYG{n}{derivative}\PYG{p}{)}
+\PYG{n}{solution} \PYG{o}{=} \PYG{n}{sp}\PYG{o}{.}\PYG{n}{solve}\PYG{p}{(}\PYG{n}{derivative}\PYG{p}{,} \PYG{n}{p}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ The max Price is: \PYGZdq{}}\PYG{p}{,}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{solution}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{))}
+
+
+\PYG{c+c1}{\PYGZsh{} Graphing settings (for the second graph)}
+
+\PYG{n}{graph2} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} changing stylesheet}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{style}\PYG{o}{.}\PYG{n}{use}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}seaborn\PYGZhy{}pastel\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} set gird}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{grid}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}on\PYGZsq{}}\PYG{p}{,}\PYG{n}{linestyle}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Quantity\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Price\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{n}{y\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}o\PYGZdq{}}\PYG{p}{,}\PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Real Facts\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{n}{m\PYGZus{}2}\PYG{o}{*}\PYG{n}{x\PYGZus{}processed\PYGZus{}data} \PYG{o}{+} \PYG{n}{b\PYGZus{}2}\PYG{p}{,}\PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Best Fitting Line\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{n}{y\PYGZus{}processed\PYGZus{}data}\PYG{o}{\PYGZhy{}}\PYG{n}{m\PYGZus{}2}\PYG{o}{*}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{o}{\PYGZhy{}}\PYG{n}{b\PYGZus{}2}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Errs.\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{o}{*}\PYG{n}{x\PYGZus{}processed\PYGZus{}data}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Best Fitting Line\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{set\PYGZus{}weight}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}bold\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{n}{loc}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}center right\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{savefig}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Graph\PYGZus{}2.pdf\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{tight\PYGZus{}layout}\PYG{p}{()}
+
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{()}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{rc}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}text\PYGZsq{}}\PYG{p}{,} \PYG{n}{usetex}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{rc}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}font\PYGZsq{}}\PYG{p}{,} \PYG{n}{family}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}serif\PYGZsq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Prints both of the graphs}
+
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\end{Verbatim}
